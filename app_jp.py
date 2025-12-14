@@ -98,7 +98,7 @@ def summarize_month(df_feat, feature_cols, month_start, month_end):
     direction = "📈 上昇傾向" if avg_pred > 0 else "📉 下降傾向"
 
     summary = f"""
-    ## 月次予測サマリー
+    ## 月次予測
     - 平均予測値: `{avg_pred:.5f}`
     - 傾向: {direction}
     """
@@ -106,7 +106,7 @@ def summarize_month(df_feat, feature_cols, month_start, month_end):
 
 # --- Streamlit UI ---
 st.set_page_config(page_title="月次予測ツール", page_icon="📅")
-st.title("📅月未来予測")
+st.title("📅月単位の未来予測")
 
 df_all = load_all_series()
 df_feat, feature_cols = make_features(df_all)
@@ -126,4 +126,5 @@ if st.button("月予測を実行"):
             st.line_chart(df_pred["予測値"])
 
 latest_date = df_feat.index.max()
+
 st.caption(f"📌 最新データ日: {latest_date.date()}")
